@@ -131,11 +131,19 @@ impl eframe::App for MyApp {
                             println!("{}", ttext.clone());
                             KeybdKey::bind_all(|event| {
                                 match inputbot::from_keybd_key(event) {
-                                    Some(c) => println!("{c}"),
+                                    Some(c) => {
+                                        println!("{c}");
+                                        // for key in KeybdKey::into() {
+                                        //     KeybdKey::unbind(key);
+                                        // }
+                                        KeybdKey::unbind_all();
+                                        //MouseButton::unbind(self)
+                                    }
                                     None => println!("Unregistered Key"),
                                 };
                             });
                             inputbot::handle_input_events();
+                            println!("123");
                         }
                     });
             });
